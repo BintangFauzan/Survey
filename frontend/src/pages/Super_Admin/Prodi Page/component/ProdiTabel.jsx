@@ -1,6 +1,6 @@
 import DataTable from "react-data-table-component";
-import Button from "../../../../components/ui/button/Button";
 import { FolderIcon, PencilIcon, TrashBinIcon } from "../../../../icons";
+import Button from "../../../../components/ui/button/Button";
 
 export default function ProdiTabel({
   dataProdi,
@@ -8,6 +8,7 @@ export default function ProdiTabel({
   openModalHapus,
   openModalEdit,
 }) {
+  // Check if dataProdi is defined
   const columns = [
     {
       name: "No",
@@ -37,7 +38,7 @@ export default function ProdiTabel({
             size="sm"
             variant="danger"
             startIcon={<TrashBinIcon className="w-4 h-4" />}
-             onClick={() => openModalHapus(row.id)}
+            onClick={() => openModalHapus(row.id)}
           >
             Hapus
           </Button>
@@ -71,36 +72,53 @@ export default function ProdiTabel({
       },
     },
   };
+
   return (
     <>
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
-        <DataTable
-          columns={columns}
-          data={dataProdi.slice().reverse()}
-          progressPending={loading}
-          pagination
-          highlightOnHover
-          responsive
-          fixedHeader
-          fixedHeaderScrollHeight="500px"
-          customStyles={customStyles}
-          progressComponent={
-            <div className="py-10 flex flex-col items-center gap-3 w-full">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-              <span className="text-gray-500 dark:text-gray-400 font-medium">
-                Loading data...
-              </span>
-            </div>
-          }
-          noDataComponent={
-            <div className="py-12 flex flex-col items-center gap-3 w-full">
-              <FolderIcon className="w-12 h-12 text-gray-300 dark:text-gray-600" />
-              <span className="text-gray-500 dark:text-gray-400 font-medium">
-                Tidak ada data pengguna.
-              </span>
-            </div>
-          }
-        />
+        {dataProdi ? (
+          <DataTable
+            columns={columns}
+            data={dataProdi.slice().reverse()}
+            progressPending={loading}
+            pagination
+            highlightOnHover
+            responsive
+            fixedHeader
+            fixedHeaderScrollHeight="500px"
+            customStyles={customStyles}
+            progressComponent={
+              <div className="py-10 flex flex-col items-center gap-3 w-full">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                <span className="text-gray-500 dark:text-gray-400 font-medium">
+                  Loading data...
+                </span>
+              </div>
+            }
+            noDataComponent={
+              <div className="py-12 flex flex-col items-center gap-3 w-full">
+                {dataProdi.length === 0 ? (
+                  <FolderIcon className="w-12 h-12 text-gray-300 dark:text-gray-600" />
+                ) : (
+                  <TrashBinIcon className="w-12 h-12 text-gray-300 dark:text-gray-600" />
+                )}
+                <span className="text-gray-500 dark:text-gray-400 font-medium">
+                  Tidak ada data pengguna.
+                </span>
+              </div>
+            }
+          />
+        ) : (
+          <div
+            className="flex items-center justify-center py-12"
+            style={{ height: "100vh" }}
+          >
+            <FolderIcon className="w-12 h-12 text-gray-300 dark:text-gray-600" />
+            <span className="text-gray-500 dark:text-gray-400 font-medium">
+              Tidak ada data pengguna.
+            </span>
+          </div>
+        )}
       </div>
     </>
   );

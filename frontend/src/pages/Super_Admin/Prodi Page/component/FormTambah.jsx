@@ -14,7 +14,8 @@ export default function FormTambah({ onSucces,closeModal }) {
       alert("Berhasil tambah prodi");
       if (onSucces) onSucces();
     } catch (err) {
-      alert("Gagal tambah prodi", err);
+      const errorMsg = err.response.data.error
+      alert("Gagal tambah prodi", errorMsg);
     }
   }
   return (

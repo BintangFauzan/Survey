@@ -15,7 +15,7 @@ class ProdiController extends Controller
         return response()->json([
             'status' => true,
             'data' => $prodi
-        ]);
+        ], 200);
     }
 
     public function store(Request $request){
@@ -34,7 +34,7 @@ class ProdiController extends Controller
                 'status' => false,
                 'message' => 'Gagal nambah prodi',
                 'error' => $err->getMessage()
-            ]);
+            ], 400);
         }
     }
 
@@ -46,7 +46,7 @@ class ProdiController extends Controller
             'status' => true,
             'message' => 'Berhasil hapus prodi',
             'data' => $prodi
-        ]);
+        ], 200);
     }
 
     public function update(Request $request, $id){
@@ -67,7 +67,7 @@ class ProdiController extends Controller
                 'status' => false,
                 'message' => 'Gagal update nama prodi',
                 'error' => $err->getMessage()
-            ]);
+            ], 400);
         }
     }
 }

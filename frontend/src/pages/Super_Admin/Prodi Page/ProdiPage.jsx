@@ -7,6 +7,7 @@ import Button from "../../../components/ui/button/Button"
 import FormTambah from "./component/FormTambah"
 import FormEdit from "./component/FormEdit"
 import Swal from "sweetalert2"; // <-- Tambahkan impor Swal
+import axios from "axios"
 
 export default function ProdiPage() {
     const [dataProdi, setDataProdi] = useState([])
@@ -23,19 +24,19 @@ export default function ProdiPage() {
     async function fetchDataProdi() {
         setLoading(true)
         try{
-            const res = await apiClient.get('/prodi')
-            const data = res.data.data.data
+            const res = await axios.get("http://127.0.0.1:8000/api/prodi")
+            const data = res.data.data
             setDataProdi(data)
             setRefreshData(false)
         }catch(err){
-            console.log("Gagal ambil data prodi", err)
+            console.log("Gagal ambil data prodi", err.response ? err.response.data : err.response.message)
         }finally{
             setLoading(false)
         }
     }
 
     useEffect(() => {
-        fetchDataProdi()
+        fetchDataProdi();
     }, [refreshData])
 
     function handleSuccesTambahProdi(){
@@ -83,6 +84,10 @@ export default function ProdiPage() {
         setIsModalEditOpen(true)
         setEditProdiId(id)
     }
+
+    console.log("prodi", dataProdi)
+    const token = localStorage.getItem("AuthToken")
+    console.log("Token", token)
 
     return(
         <>
