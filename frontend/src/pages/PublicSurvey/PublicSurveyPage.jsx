@@ -132,7 +132,7 @@ export default function PublicSurveyPage() {
     } catch (err) {
         const errorMessage = err.response?.data?.message || "Gagal mengirim survei.";
         alert(`Error: ${errorMessage}`);
-        console.error("Error submitting survey:", err);
+        console.log("Error submitting survey:", errorMessage);
     } finally {
         setSubmitting(false);
     }

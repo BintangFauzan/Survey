@@ -16,7 +16,7 @@ export default function FormTambah({ onSucces, closeModal }) {
   async function fetchDataProdi() {
     try{
       const res = await apiClient.get('/prodi')
-      const data = res.data.data.data.map((p) => ({
+      const data = res.data.data.map((p) => ({
         value: p.id,
         label: p.nama_prodi
       }))
