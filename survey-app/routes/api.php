@@ -22,8 +22,7 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::get('/survey/{slug}', [GenerateSurveyController::class, 'getSurvey']);
 Route::get('/prodi', [ProdiController::class, 'index']); // Jadikan publik untuk dropdown responden
-
-  Route::resource('/penilaian', PenilaianController::class)->only('index', 'show', 'store', 'destroy');
+Route::resource('/penilaian', PenilaianController::class)->only('index', 'show', 'store', 'destroy');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [UserController::class, 'logout']);

@@ -10,7 +10,8 @@ class Penilaian extends Model
 
     protected $fillable = [
         'responden_id',
-        'prd_id'
+        'prd_id',
+        'prodi_id'
     ];
 
     /**
@@ -30,6 +31,9 @@ class Penilaian extends Model
 
     public function details(){
         return $this->hasMany(PenilaianDetail::class, 'penilaian_id');
+    }
+    public function prodi(){
+        return $this->belongsTo(Prodi::class, 'prodi_id');
     }
 
     /**

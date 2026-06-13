@@ -11,7 +11,7 @@ class PeriodeController extends Controller
 {
    public function index(Request $request)
 {
-    $query = Periode::with('kategori');
+    $query = Periode::with('kategori', 'prodi');
     
     if($request->has('kategori_id') && $request->kategori_id != ''){
         $query->where('ktg_id', $request->kategori_id);

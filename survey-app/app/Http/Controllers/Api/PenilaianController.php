@@ -44,6 +44,7 @@ class PenilaianController extends Controller
     {
         $validated = $request->validate([
             'prd_id' => 'required|exists:periode,id',
+            'prodi_id' => 'required|exists:prodi,id',
             'svy_nama' => 'required|string|max:255',
             'svy_jabatan' => 'required|string|max:255',
             'svy_nomor_whatsapp' => 'required|string|max:20',
@@ -58,6 +59,7 @@ class PenilaianController extends Controller
             // 1. Buat data responden terlebih dahulu
             $responden = Responden::create([
                 'periode_id' => $validated['prd_id'],
+                'prodi_id' => $validated['prodi_id'],
                 'svy_nama' => $validated['svy_nama'],
                 'svy_jabatan' => $validated['svy_jabatan'],
                 'svy_nomor_whatsapp' => $validated['svy_nomor_whatsapp'],

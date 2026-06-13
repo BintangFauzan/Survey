@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 class GenerateSurveyController extends Controller
 {
     public function index(Request $request){
-        $query = Survey::query();
+        $query = Survey::with('prodi', 'user','periode','kategori');
 
         if($request->has('search') && $request->search != ''){
             $searchTerm = $request->search;

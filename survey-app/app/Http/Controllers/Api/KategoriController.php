@@ -11,7 +11,7 @@ class KategoriController extends Controller
 {
     public function index(Request $request){
          // Mulai query builder
-        $query = Kategori::query();
+        $query = Kategori::with('prodi');
 
         // Cek jika ada parameter 'search' dan terapkan logika pencarian & pengurutan
         if($request->has('search') && $request->search !=''){

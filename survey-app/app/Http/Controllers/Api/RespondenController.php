@@ -10,13 +10,14 @@ use Illuminate\Http\Request;
 class RespondenController extends Controller
 {
     public function index()
-    {
-        $responden = Responden::latest()->paginate(15);
-        return response()->json([
-            'status' => true,
-            'data' => $responden
-        ]);
-    }
+{
+    $responden = Responden::with('prodi', 'periode')->latest()->paginate(15);
+    
+    return response()->json([
+        'status' => true,
+        'data' => $responden
+    ]);
+}
 
     public function store(Request $request)
     {
